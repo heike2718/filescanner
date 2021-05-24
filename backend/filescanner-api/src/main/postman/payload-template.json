@@ -1,0 +1,8 @@
+{
+  "clientId": "{{clientId}}",
+  "fileOwner": "heike",
+  "upload": {
+    "name": "{{uploadName}}",
+    "dataBase64": "{{data}}"
+  }
+}

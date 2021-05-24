@@ -1,0 +1,148 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>de.egladil.web</groupId>
+	<artifactId>filescanner-tests</artifactId>
+	<version>1.0.0</version>
+
+	<properties>
+		<filescanner-version>1.0.0</filescanner-version>
+		<commons.version>1.5.1</commons.version>
+		<dependency-check.version>6.0.1</dependency-check.version>
+		<slf4j.version>1.7.25</slf4j.version>
+		<log4j.version>2.13.3</log4j.version>
+		<mockito.version>3.1.0</mockito.version>
+		<maven.compiler.source>1.11</maven.compiler.source>
+		<maven.compiler.target>1.11</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+	</properties>
+
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>de.egladil.web</groupId>
+				<artifactId>commons-bom</artifactId>
+				<version>${commons.version}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>de.egladil.web</groupId>
+			<artifactId>filescanner-api</artifactId>
+			<version>${filescanner-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>jakarta.platform</groupId>
+			<artifactId>jakarta.jakartaee-api</artifactId>
+			<version>8.0.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-core</artifactId>
+			<version>5.4.26.Final</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.8.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>fi.solita.clamav</groupId>
+			<artifactId>clamav-client</artifactId>
+			<version>1.0.1</version>
+		</dependency>
+
+
+		<!-- Test START -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.7.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-engine</artifactId>
+			<version>5.7.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-runner</artifactId>
+			<version>1.7.1</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>${log4j.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>3.4.6</version>
+			<scope>test</scope>
+
+		</dependency>
+		<!-- Test ENDE -->
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<release>11</release>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.22.0</version>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-failsafe-plugin</artifactId>
+				<version>2.22.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>integration-test</goal>
+							<goal>verify</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- <plugin> <groupId>io.fabric8</groupId> <artifactId>docker-maven-plugin</artifactId>
+				<version>0.34.1</version> <extensions>true</extensions> <executions> <execution>
+				<id>prepare-it-database</id> <goals> <goal>start</goal> </goals> <configuration>
+				<images> <image> <name>heik2718/it-mk_wettbewerb-db:v27</name> <alias>it-mk_wettbewerb-db</alias>
+				<run> <ports> <port>4306:3306</port> </ports> <wait> <log>mysqld: ready for
+				connections</log> <time>5000</time> </wait> </run> </image> </images> </configuration>
+				</execution> <execution> <id>remove-it-database</id> <goals> <goal>stop</goal>
+				</goals> </execution> </executions> </plugin> -->
+		</plugins>
+	</build>
+
+</project>
