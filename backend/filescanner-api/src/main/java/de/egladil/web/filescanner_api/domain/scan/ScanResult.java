@@ -29,6 +29,9 @@ public class ScanResult {
 	@JsonProperty
 	private ThreadDetection threadDetection;
 
+	@JsonProperty
+	private String charset;
+
 	public String getMediaType() {
 
 		return mediaType;
@@ -82,6 +85,16 @@ public class ScanResult {
 
 		this.threadDetection = threadDetection;
 		return this;
+	}
+
+	public String getCharset() {
+
+		return charset;
+	}
+
+	public void setCharset(final String charset) {
+
+		this.charset = charset;
 	}
 
 }

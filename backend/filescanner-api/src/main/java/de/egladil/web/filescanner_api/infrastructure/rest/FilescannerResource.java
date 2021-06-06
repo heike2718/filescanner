@@ -6,6 +6,7 @@ package de.egladil.web.filescanner_api.infrastructure.rest;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -33,6 +34,15 @@ public class FilescannerResource {
 
 	@Inject
 	ScanService scanService;
+
+	@GET
+	@Path("hello")
+	public Response hello() {
+
+		return Response.ok(ResponsePayload.messageOnly(MessagePayload.info(
+			"Hallo hier spricht die FilescannerResource der filescanner-api vom Port 9800. Um eine Datei zu scannen, URL /filescanner/parse als POST - request einem ScanRequestPayload aufrufen.")))
+			.build();
+	}
 
 	@POST
 	@Path("parse")
