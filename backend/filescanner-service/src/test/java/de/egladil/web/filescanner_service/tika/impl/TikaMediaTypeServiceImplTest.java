@@ -6,147 +6,151 @@ package de.egladil.web.filescanner_service.tika.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 import de.egladil.web.filescanner_service.TestFileUtils;
 import de.egladil.web.filescanner_service.scan.Upload;
-import de.egladil.web.filescanner_service.tika.impl.TikaMediaTypeServiceImpl;
 
 /**
  * TikaMediaTypeServiceImplTest
  */
 public class TikaMediaTypeServiceImplTest {
 
-	@Test
-	void should_detectExcelTransformedFromOpenOffice() {
+	@Nested
+	class MediaTypeTests {
 
-		// Arrange
-		String filename = "auswertung_minikaenguru.xlsx";
-		Upload upload = new Upload().withName(filename)
-			.withData(TestFileUtils.loadDataQuietly("/" + filename));
+		@Test
+		void should_detectExcelTransformedFromOpenOffice() {
 
-		TikaMediaTypeServiceImpl service = new TikaMediaTypeServiceImpl();
+			// Arrange
+			String filename = "auswertung_minikaenguru.xlsx";
+			Upload upload = new Upload().withName(filename)
+				.withData(TestFileUtils.loadDataQuietly("/" + filename));
 
-		// Act
-		String mediaType = service.detectMediaType(upload);
+			TikaMediaTypeServiceImpl service = new TikaMediaTypeServiceImpl();
 
-		System.out.println("\n");
-		System.out.println(filename);
-		System.out.println(mediaType);
+			// Act
+			String mediaType = service.detectMediaType(upload);
 
-		// Assert
-		assertEquals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", mediaType);
+			System.out.println("\n");
+			System.out.println(filename);
+			System.out.println(mediaType);
 
-	}
+			// Assert
+			assertEquals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", mediaType);
 
-	@Test
-	void should_detectExcel() {
+		}
 
-		// Arrange
-		String filename = "excel.xlsx";
-		Upload upload = new Upload().withName(filename)
-			.withData(TestFileUtils.loadDataQuietly("/" + filename));
+		@Test
+		void should_detectExcel() {
 
-		TikaMediaTypeServiceImpl service = new TikaMediaTypeServiceImpl();
+			// Arrange
+			String filename = "excel.xlsx";
+			Upload upload = new Upload().withName(filename)
+				.withData(TestFileUtils.loadDataQuietly("/" + filename));
 
-		// Act
-		String mediaType = service.detectMediaType(upload);
+			TikaMediaTypeServiceImpl service = new TikaMediaTypeServiceImpl();
 
-		System.out.println("\n");
-		System.out.println(filename);
-		System.out.println(mediaType);
+			// Act
+			String mediaType = service.detectMediaType(upload);
 
-		// Assert
-		assertEquals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", mediaType);
+			System.out.println("\n");
+			System.out.println(filename);
+			System.out.println(mediaType);
 
-	}
+			// Assert
+			assertEquals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", mediaType);
 
-	@Test
-	void should_detectExcelAltesFormat() {
+		}
 
-		// Arrange
-		String filename = "excel_altes_format.xls";
-		Upload upload = new Upload().withName(filename)
-			.withData(TestFileUtils.loadDataQuietly("/" + filename));
+		@Test
+		void should_detectExcelAltesFormat() {
 
-		TikaMediaTypeServiceImpl service = new TikaMediaTypeServiceImpl();
+			// Arrange
+			String filename = "excel_altes_format.xls";
+			Upload upload = new Upload().withName(filename)
+				.withData(TestFileUtils.loadDataQuietly("/" + filename));
 
-		// Act
-		String mediaType = service.detectMediaType(upload);
+			TikaMediaTypeServiceImpl service = new TikaMediaTypeServiceImpl();
 
-		System.out.println("\n");
-		System.out.println(filename);
-		System.out.println(mediaType);
+			// Act
+			String mediaType = service.detectMediaType(upload);
 
-		// Assert
-		assertEquals("application/vnd.ms-excel", mediaType);
+			System.out.println("\n");
+			System.out.println(filename);
+			System.out.println(mediaType);
 
-	}
+			// Assert
+			assertEquals("application/vnd.ms-excel", mediaType);
 
-	@Test
-	void should_detectOpenOfficeSpreadsheet() {
+		}
 
-		// Arrange
-		String filename = "auswertungstabelle_test.ods";
-		Upload upload = new Upload().withName(filename)
-			.withData(TestFileUtils.loadDataQuietly("/" + filename));
+		@Test
+		void should_detectOpenOfficeSpreadsheet() {
 
-		TikaMediaTypeServiceImpl service = new TikaMediaTypeServiceImpl();
+			// Arrange
+			String filename = "auswertungstabelle_test.ods";
+			Upload upload = new Upload().withName(filename)
+				.withData(TestFileUtils.loadDataQuietly("/" + filename));
 
-		// Act
-		String mediaType = service.detectMediaType(upload);
+			TikaMediaTypeServiceImpl service = new TikaMediaTypeServiceImpl();
 
-		System.out.println("\n");
-		System.out.println(filename);
-		System.out.println(mediaType);
+			// Act
+			String mediaType = service.detectMediaType(upload);
 
-		// Assert
-		assertEquals("application/vnd.oasis.opendocument.spreadsheet", mediaType);
+			System.out.println("\n");
+			System.out.println(filename);
+			System.out.println(mediaType);
 
-	}
+			// Assert
+			assertEquals("application/vnd.oasis.opendocument.spreadsheet", mediaType);
 
-	@Test
-	void should_detectOpenOfficeTextDocument() {
+		}
 
-		// Arrange
-		String filename = "textdokument.odt";
-		Upload upload = new Upload().withName(filename)
-			.withData(TestFileUtils.loadDataQuietly("/" + filename));
+		@Test
+		void should_detectOpenOfficeTextDocument() {
 
-		TikaMediaTypeServiceImpl service = new TikaMediaTypeServiceImpl();
+			// Arrange
+			String filename = "textdokument.odt";
+			Upload upload = new Upload().withName(filename)
+				.withData(TestFileUtils.loadDataQuietly("/" + filename));
 
-		// Act
-		String mediaType = service.detectMediaType(upload);
+			TikaMediaTypeServiceImpl service = new TikaMediaTypeServiceImpl();
 
-		System.out.println("\n");
-		System.out.println(filename);
-		System.out.println(mediaType);
+			// Act
+			String mediaType = service.detectMediaType(upload);
 
-		// Assert
-		assertEquals("application/vnd.oasis.opendocument.text", mediaType);
+			System.out.println("\n");
+			System.out.println(filename);
+			System.out.println(mediaType);
 
-	}
+			// Assert
+			assertEquals("application/vnd.oasis.opendocument.text", mediaType);
 
-	@Test
-	void should_detectTextFile() {
+		}
 
-		// Arrange
-		String filename = "text.csv";
-		Upload upload = new Upload().withName(filename)
-			.withData(TestFileUtils.loadDataQuietly("/" + filename));
+		@Test
+		void should_detectTextFile() {
 
-		TikaMediaTypeServiceImpl service = new TikaMediaTypeServiceImpl();
+			// Arrange
+			String filename = "text.csv";
+			Upload upload = new Upload().withName(filename)
+				.withData(TestFileUtils.loadDataQuietly("/" + filename));
 
-		// Act
-		String mediaType = service.detectMediaType(upload);
+			TikaMediaTypeServiceImpl service = new TikaMediaTypeServiceImpl();
 
-		System.out.println("\n");
-		System.out.println(filename);
-		System.out.println(mediaType);
+			// Act
+			String mediaType = service.detectMediaType(upload);
 
-		// Assert
-		assertEquals("text/plain", mediaType);
+			System.out.println("\n");
+			System.out.println(filename);
+			System.out.println(mediaType);
 
+			// Assert
+			assertEquals("text/plain", mediaType);
+
+		}
 	}
 
 }

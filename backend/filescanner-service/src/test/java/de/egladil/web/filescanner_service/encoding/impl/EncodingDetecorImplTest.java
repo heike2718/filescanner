@@ -39,6 +39,24 @@ public class EncodingDetecorImplTest {
 	}
 
 	@Test
+	void should_detectTheCorrrectEncoding_when_excelWithKyrillisch() throws Exception {
+
+		// Arrange
+		Upload upload = new Upload().withData(TestFileUtils.loadDataQuietly("/auswertung_minikaenguru-utf8.xlsx"))
+			.withName("auswertung_minikaenguru-utf8.xlsx");
+
+		// Act
+		Optional<Charset> optCharset = new EncodingDetecorImpl().detectEncoding(upload);
+
+		// Assert
+		assertTrue(optCharset.isPresent());
+
+		Charset charset = optCharset.get();
+		assertEquals(Charset.forName("UTF-8"), charset);
+
+	}
+
+	@Test
 	void should_detectTheCorrrectEncoding_when_odt() throws Exception {
 
 		// Arrange
