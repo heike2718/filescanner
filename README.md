@@ -20,7 +20,7 @@ There shoud be a clamav installation at the server as for instance [mko-x/docker
 
 ## Usage as library
 
-In addition to setting this up as microservice, the filescanner-service can uses as jar-dependency as is in order to avoid RESTClient communication overhead.
+In addition to setting this up as microservice, the filescanner-service can be used as jar-dependency as is in order to avoid RESTClient communication overhead.
 
 ## Releasenotes
 
