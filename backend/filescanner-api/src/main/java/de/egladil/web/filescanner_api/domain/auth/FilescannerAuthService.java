@@ -9,8 +9,8 @@ import javax.inject.Inject;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
-import de.egladil.web.filescanner_api.domain.event.DomainEventService;
-import de.egladil.web.filescanner_api.domain.event.SecurityIncidentRegistered;
+import de.egladil.web.filescanner_service.event.DomainEventService;
+import de.egladil.web.filescanner_service.event.FilescannerSecurityIncidentRegistered;
 
 /**
  * FilescannerAuthService
@@ -32,7 +32,7 @@ public class FilescannerAuthService {
 
 			String message = "Unerlaubter Zugriff auf eine Resource mit der ClientID=" + clientId;
 
-			SecurityIncidentRegistered secEvent = new SecurityIncidentRegistered().withMessage(message);
+			FilescannerSecurityIncidentRegistered secEvent = new FilescannerSecurityIncidentRegistered().withMessage(message);
 
 			eventService.handleDomainEvent(secEvent);
 		}

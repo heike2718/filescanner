@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import de.egladil.web.commons_validation.payload.MessagePayload;
 import de.egladil.web.commons_validation.payload.ResponsePayload;
 import de.egladil.web.filescanner_api.domain.error.ClientAuthException;
-import de.egladil.web.filescanner_api.domain.error.FilescannerRuntimeException;
+import de.egladil.web.filescanner_service.error.FilescannerRuntimeException;
 
 /**
  * FilescannerExceptionMapper
