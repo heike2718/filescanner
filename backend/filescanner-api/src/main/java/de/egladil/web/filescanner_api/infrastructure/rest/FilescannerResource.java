@@ -20,9 +20,9 @@ import de.egladil.web.commons_validation.payload.MessagePayload;
 import de.egladil.web.commons_validation.payload.ResponsePayload;
 import de.egladil.web.filescanner_api.domain.auth.FilescannerAuthService;
 import de.egladil.web.filescanner_api.domain.error.ClientAuthException;
-import de.egladil.web.filescanner_api.domain.scan.ScanRequestPayload;
-import de.egladil.web.filescanner_api.domain.scan.ScanResult;
-import de.egladil.web.filescanner_api.domain.scan.ScanService;
+import de.egladil.web.filescanner_service.scan.ScanRequestPayload;
+import de.egladil.web.filescanner_service.scan.ScanResult;
+import de.egladil.web.filescanner_service.scan.ScanService;
 
 @Path("/")
 public class FilescannerResource {
