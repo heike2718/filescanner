@@ -4,17 +4,14 @@
 // =====================================================
 package de.egladil.web.filescanner_service.scan.impl;
 
-import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import de.egladil.web.filescanner_service.clamav.ClamAVService;
 import de.egladil.web.filescanner_service.clamav.VirusDetection;
-import de.egladil.web.filescanner_service.encoding.EncodingDetector;
 import de.egladil.web.filescanner_service.scan.ScanRequestPayload;
 import de.egladil.web.filescanner_service.scan.ScanResult;
 import de.egladil.web.filescanner_service.scan.ScanService;
@@ -42,15 +39,11 @@ public class ScanServiceImpl implements ScanService {
 	@Inject
 	ZipBombScanner zipBombScanner;
 
-	@Inject
-	EncodingDetector encodingDetector;
-
 	public static ScanServiceImpl createForIntegrationTest() {
 
 		ScanServiceImpl result = new ScanServiceImpl();
 		result.clamAVService = ClamAVService.createForIntegrationTest();
 		result.tikaMediaTypeService = TikaMediaTypeService.createForIntegrationTest();
-		result.encodingDetector = EncodingDetector.createForIntegrationTests();
 		return result;
 
 	}
@@ -80,15 +73,8 @@ public class ScanServiceImpl implements ScanService {
 				threadDetection = zipBombScanner.checkForZipBomb(scanRequestPayload);
 			}
 
-			Optional<Charset> optCharset = encodingDetector.detectEncoding(upload);
-
 			ScanResult result = new ScanResult().withUserID(ownerId).withUploadName(upload.getName()).withMediaType(mediaType)
 				.withThreadDetection(threadDetection);
-
-			if (optCharset.isPresent()) {
-
-				result.setCharset(optCharset.get().name());
-			}
 
 			return result;
 		} finally {
