@@ -24,8 +24,8 @@ import de.egladil.web.filescanner_service.mail.MailService;
 @ApplicationScoped
 public class MailServiceImpl implements MailService {
 
-	@ConfigProperty(name = "env")
-	String environment;
+	@ConfigProperty(name = "stage")
+	String stage;
 
 	@ConfigProperty(name = "email.host")
 	String host;
@@ -64,7 +64,7 @@ public class MailServiceImpl implements MailService {
 	String getSubject(final Date jetzt) {
 
 		SimpleDateFormat sdf = new SimpleDateFormat(CommonTimeUtils.DEFAULT_DATE_MINUTES_FORMAT);
-		return environment + ": Filescanner Warnung " + sdf.format(jetzt);
+		return stage + ": Filescanner Warnung " + sdf.format(jetzt);
 	}
 
 }
