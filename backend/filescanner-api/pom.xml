@@ -10,7 +10,7 @@
 	<version>2.0.1</version>
 
 	<properties>
-		<commons.version>1.7.0</commons.version>
+		<commons.version>1.7.4</commons.version>
 		<compiler-plugin.version>3.8.1</compiler-plugin.version>
 		<maven.compiler.parameters>true</maven.compiler.parameters>
 		<maven.compiler.source>11</maven.compiler.source>
