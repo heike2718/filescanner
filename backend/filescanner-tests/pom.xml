@@ -5,15 +5,17 @@
 
 	<groupId>de.egladil.web</groupId>
 	<artifactId>filescanner-tests</artifactId>
-	<version>2.0.1</version>
+	<version>2.0.2</version>
 
 	<properties>
-		<filescanner-version>2.0.1</filescanner-version>
-		<commons.version>1.7.4</commons.version>
-		<dependency-check.version>6.5.0</dependency-check.version>
+		<filescanner-version>2.0.2</filescanner-version>
+		<commons.version>1.7.5</commons.version>
+		<dependency-check.version>6.5.2</dependency-check.version>
 		<slf4j.version>1.7.25</slf4j.version>
-		<log4j.version>2.16.0</log4j.version>
+		<logback.version>1.2.10</logback.version>
+		<surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
 		<mockito.version>3.1.0</mockito.version>
+		<junit.jupiter.version>5.8.1</junit.jupiter.version>
 		<maven.compiler.source>1.11</maven.compiler.source>
 		<maven.compiler.target>1.11</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -69,28 +71,21 @@
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
-			<version>5.7.1</version>
+			<version>${junit.jupiter.version}</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
-			<artifactId>junit-jupiter-engine</artifactId>
-			<version>5.7.1</version>
+			<artifactId>junit-jupiter</artifactId>
+			<version>${junit.jupiter.version}</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
-			<groupId>org.junit.platform</groupId>
-			<artifactId>junit-platform-runner</artifactId>
-			<version>1.7.1</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.logging.log4j</groupId>
-			<artifactId>log4j-core</artifactId>
-			<version>${log4j.version}</version>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-core</artifactId>
+			<version>${logback.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

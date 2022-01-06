@@ -4,7 +4,7 @@
 // =====================================================
 package de.egladil.web.filescanner_tests;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -78,7 +78,8 @@ public class ClamAVClientTest {
 
 			// Assert
 			String resultAsString = new String(result);
-			assertTrue(resultAsString.contains("Win.Test.EICAR_HDB-1 FOUND"));
+			System.out.println(resultAsString);
+			assertTrue(resultAsString.toLowerCase().contains("eicar"));
 		}
 	}
 }
