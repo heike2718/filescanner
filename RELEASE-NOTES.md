@@ -1,5 +1,9 @@
 # filescanner Rease Notes
 
+__Release 2.0.3:__
+
+Read Timeout Exception mit besserem log
+
 __Release 2.0.2:__
 
 dependencies bumped because of log4j2-test depencendy is blamed to often
