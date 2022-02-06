@@ -22,7 +22,7 @@ public class ClamAVClientTest {
 
 	private static final int PORT = 3310;
 
-	private static final int TIMEOUT = 5000;
+	private static final int TIMEOUT = 10000;
 
 	@Test
 	void scanCleanFile() throws IOException {

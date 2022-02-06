@@ -4,6 +4,7 @@
 // =====================================================
 package de.egladil.web.filescanner_service.clamav.impl;
 
+import java.net.SocketTimeoutException;
 import java.util.Base64;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -38,7 +39,7 @@ public class ClamAVServiceImpl implements ClamAVService {
 	@ConfigProperty(name = "clamav.port", defaultValue = "3310")
 	String portAsString = null;
 
-	@ConfigProperty(name = "clamav.timeout", defaultValue = "5000")
+	@ConfigProperty(name = "clamav.timeout", defaultValue = "10000")
 	String timeoutAsString = null;
 
 	@Inject
@@ -49,7 +50,7 @@ public class ClamAVServiceImpl implements ClamAVService {
 		ClamAVServiceImpl result = new ClamAVServiceImpl();
 		result.host = "172.20.0.2";
 		result.portAsString = "3310";
-		result.timeoutAsString = "5000";
+		result.timeoutAsString = "10000";
 		result.domainEventService = FilescannerDomainEventServiceImpl.createForIntegrationTests();
 		return result;
 	}
@@ -83,6 +84,14 @@ public class ClamAVServiceImpl implements ClamAVService {
 			}
 
 			return VirusDetection.FALSE;
+
+		} catch (SocketTimeoutException e) {
+
+			LOGGER.error("SocketTimeoutException: upload.max.bytes und clamav.timeout passen vermutlich nicht zusammen - ",
+				e.getMessage());
+			throw new FilescannerRuntimeException(
+				"SocketTimeoutException beim Scannen des Files " + upload.getName() + ": clientId="
+					+ StringUtils.abbreviate(scanRequestPayload.getClientId(), 11) + ", ownerId" + ownerId);
 
 		} catch (Exception e) {
 
