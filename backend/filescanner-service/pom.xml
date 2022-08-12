@@ -4,13 +4,13 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.egladil.web</groupId>
 	<artifactId>filescanner-service</artifactId>
-	<version>2.0.5</version>
+	<version>2.0.6</version>
 
 	<properties>
 		<commons.version>1.7.7</commons.version>
 		<quarkus.platform.artifact-id>quarkus-universe-bom</quarkus.platform.artifact-id>
 		<quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-		<quarkus.platform.version>2.8.0.Final</quarkus.platform.version>
+		<quarkus.platform.version>2.11.1.Final</quarkus.platform.version>
 		<jackson.databind.version>2.13.2.2</jackson.databind.version>
 		<junit.jupiter.version>5.8.1</junit.jupiter.version>
 		<logback.version>1.2.10</logback.version>
@@ -18,8 +18,12 @@
 		<dependency-check.version>7.1.1</dependency-check.version>
 		<compiler-plugin.version>3.8.1</compiler-plugin.version>
 		<maven.compiler.parameters>true</maven.compiler.parameters>
-		<maven.compiler.source>1.11</maven.compiler.source>
-		<maven.compiler.target>1.11</maven.compiler.target>
+		<!--
+		<maven.compiler.source>17</maven.compiler.source>
+		<maven.compiler.target>17</maven.compiler.target>
+		-->
+		<maven.compiler.source>11</maven.compiler.source>
+		<maven.compiler.target>11</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 	</properties>
@@ -86,8 +90,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>io.quarkus</groupId>
+			<groupId>io.quarkiverse.tika</groupId>
 			<artifactId>quarkus-tika</artifactId>
+			<version>1.0.3</version>
 		</dependency>
 
 		<dependency>
@@ -98,7 +103,6 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>${jackson.databind.version}</version>
 		</dependency>
 
 		<dependency>
