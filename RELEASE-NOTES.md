@@ -1,5 +1,9 @@
 # filescanner Rease Notes
 
+__Release 2.1.0:__
+
+checkAlive-Methode, die ein ping an den ClamAV-Service sendet und so prüft, ob dieser erreichbar ist.
+
 __Release 2.0.3:__
 
 Read Timeout Exception mit besserem log
