@@ -33,7 +33,7 @@ public class ClamAVServiceImpl implements ClamAVService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ClamAVServiceImpl.class);
 
-	@ConfigProperty(name = "clamav.host")
+	@ConfigProperty(name = "clamav.host", defaultValue = "localhost")
 	String host = null;
 
 	@ConfigProperty(name = "clamav.port", defaultValue = "3310")
@@ -53,6 +53,21 @@ public class ClamAVServiceImpl implements ClamAVService {
 		result.timeoutAsString = "10000";
 		result.domainEventService = FilescannerDomainEventServiceImpl.createForIntegrationTests();
 		return result;
+	}
+
+	@Override
+	public boolean checkAlive() {
+
+		try {
+
+			ClamAVClient clamAVClient = new ClamAVClient(host, Integer.valueOf(portAsString), Integer.valueOf(timeoutAsString));
+
+			return clamAVClient.ping();
+		} catch (Exception e) {
+
+			LOGGER.error("Unerwartete Exception: " + e.getMessage(), e);
+			return false;
+		}
 	}
 
 	@Override
