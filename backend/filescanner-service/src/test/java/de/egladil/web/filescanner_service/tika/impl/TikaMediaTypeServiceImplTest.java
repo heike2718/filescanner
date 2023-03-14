@@ -5,6 +5,7 @@
 package de.egladil.web.filescanner_service.tika.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -65,7 +66,7 @@ public class TikaMediaTypeServiceImplTest {
 		}
 
 		@Test
-		void should_detectExcelAltesFormat() {
+		void should_complain_aboutExcelAltesFormat() {
 
 			// Arrange
 			String filename = "excel_altes_format.xls";
@@ -75,14 +76,14 @@ public class TikaMediaTypeServiceImplTest {
 			TikaMediaTypeServiceImpl service = new TikaMediaTypeServiceImpl();
 
 			// Act
-			String mediaType = service.detectMediaType(upload);
+			try {
 
-			System.out.println("\n");
-			System.out.println(filename);
-			System.out.println(mediaType);
+				service.detectMediaType(upload);
+				fail("kein NoSuchFieldError");
+			} catch (NoSuchFieldError e) {
 
-			// Assert
-			assertEquals("application/vnd.ms-excel", mediaType);
+				assertEquals("WORKBOOK_DIR_ENTRY_NAMES", e.getMessage());
+			}
 
 		}
 

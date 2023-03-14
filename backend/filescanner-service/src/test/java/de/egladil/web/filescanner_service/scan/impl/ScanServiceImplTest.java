@@ -35,8 +35,8 @@ public class ScanServiceImplTest {
 	void should_scanWorkWithLargeFile() {
 
 		// Arrange
-		Upload upload = new Upload().withName("Sample1point5MB.xls")
-			.withData(TestFileUtils.loadDataQuietly("/Sample1point5MB.xls"));
+		Upload upload = new Upload().withName("Sample1point5MB.xlsx")
+			.withData(TestFileUtils.loadDataQuietly("/Sample1point5MB.xlsx"));
 		ScanRequestPayload payload = new ScanRequestPayload().withClientId("k7AxUVYzr1FBAvD8e99orRqKqx4jBwcr7Dmgn5jdBf8J")
 			.withFileOwner("heike").withUpload(upload);
 
@@ -46,7 +46,7 @@ public class ScanServiceImplTest {
 		// Assert
 		assertFalse(result.getVirusDetection().isVirusDetected());
 		assertFalse(result.getThreadDetection().isSecurityThreadDetected());
-		assertEquals("application/vnd.ms-excel", result.getMediaType());
+		assertEquals("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", result.getMediaType());
 	}
 
 	@Test

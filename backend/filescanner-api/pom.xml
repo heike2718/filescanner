@@ -7,27 +7,24 @@
 
 	<groupId>de.egladil.web</groupId>
 	<artifactId>filescanner-api</artifactId>
-	<version>2.1.1</version>
+	<version>3.1.0</version>
 
 	<properties>
-		<commons.version>1.7.7</commons.version>
+		<commons.version>1.8.0</commons.version>
 		<quarkus.platform.artifact-id>quarkus-universe-bom</quarkus.platform.artifact-id>
 		<quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-		<quarkus.platform.version>2.13.0.Final</quarkus.platform.version>
+		<quarkus.platform.version>2.16.4.Final</quarkus.platform.version>
 		<junit.jupiter.version>5.8.1</junit.jupiter.version>
 		<logback.version>1.2.10</logback.version>
 		<surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
-		<dependency-check.version>7.1.1</dependency-check.version>
+		<dependency-check.version>8.1.2</dependency-check.version>
 		<compiler-plugin.version>3.8.1</compiler-plugin.version>
 		<maven.compiler.parameters>true</maven.compiler.parameters>
-		<!--
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
-		-->
-		<maven.compiler.source>11</maven.compiler.source>
-		<maven.compiler.target>11</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<jandex-maven-plugin.version>1.2.3</jandex-maven-plugin.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -138,21 +135,16 @@
 					<parameters>${maven.compiler.parameters}</parameters>
 				</configuration>
 			</plugin>
-			<plugin>
+
+<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>${surefire-plugin.version}</version>
-				<configuration>
-					<systemPropertyVariables>
-						<java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-						<maven.home>${maven.home}</maven.home>
-					</systemPropertyVariables>
-				</configuration>
 			</plugin>
 
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.5</version>
+				<version>0.8.8</version>
 				<executions>
 					<execution>
 						<id>prepare-agent</id>
@@ -187,10 +179,21 @@
 					</systemPropertyVariables>
 				</configuration>
 			</plugin>
+
 			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${surefire-plugin.version}</version>
+				<groupId>org.jboss.jandex</groupId>
+				<artifactId>jandex-maven-plugin</artifactId>
+				<version>${jandex-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>make-index</id>
+						<goals>
+							<goal>jandex</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
+
 			<plugin>
 				<groupId>org.owasp</groupId>
 				<artifactId>dependency-check-maven</artifactId>
