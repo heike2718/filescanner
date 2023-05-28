@@ -7,7 +7,7 @@
 
 	<groupId>de.egladil.web</groupId>
 	<artifactId>filescanner-api</artifactId>
-	<version>3.1.0</version>
+	<version>3.1.1</version>
 
 	<properties>
 		<commons.version>1.8.0</commons.version>

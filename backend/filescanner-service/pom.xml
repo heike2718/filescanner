@@ -2,10 +2,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.egladil.web</groupId>
 	<artifactId>filescanner-service</artifactId>
-	<version>3.1.0</version>
+	<version>3.1.1</version>
 
 	<properties>
 		<commons.version>1.8.0</commons.version>
+		<clamav.version>1.0.1</clamav.version>
+		<jakartaee.version>8.0.0</jakartaee.version>
 		<quarkus.platform.artifact-id>quarkus-universe-bom</quarkus.platform.artifact-id>
 		<quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
 		<quarkus.platform.version>2.16.4.Final</quarkus.platform.version>
@@ -69,7 +71,7 @@
 		<dependency>
 			<groupId>jakarta.platform</groupId>
 			<artifactId>jakarta.jakartaee-api</artifactId>
-			<version>8.0.0</version>
+			<version>${jakartaee.version}</version>
 		</dependency>
 
 		<dependency>
@@ -80,11 +82,11 @@
 		<dependency>
 			<groupId>fi.solita.clamav</groupId>
 			<artifactId>clamav-client</artifactId>
-			<version>1.0.1</version>
+			<version>${clamav.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>io.quarkus</groupId>
+			<groupId>io.quarkiverse.tika</groupId>
 			<artifactId>quarkus-tika</artifactId>
 		</dependency>
 
@@ -209,6 +211,7 @@
 					<execution>
 						<phase>package</phase>
 						<goals>
+							<goal>purge</goal>
 							<goal>check</goal>
 						</goals>
 					</execution>
