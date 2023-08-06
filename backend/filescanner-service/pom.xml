@@ -1,18 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>de.egladil.web</groupId>
 	<artifactId>filescanner-service</artifactId>
-	<version>4.0.0</version>
+	<version>5.0.0</version>
 
 	<properties>
 		<commons.version>2.0.0</commons.version>
 		<clamav.version>1.0.1</clamav.version>
-		<jakartaee.version>8.0.0</jakartaee.version>
-		<quarkus.platform.artifact-id>quarkus-universe-bom</quarkus.platform.artifact-id>
-		<quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-		<quarkus.platform.version>2.16.4.Final</quarkus.platform.version>
-		<junit.jupiter.version>5.8.1</junit.jupiter.version>
-		<logback.version>1.2.10</logback.version>
+		<jakartaee.version>10.0.0</jakartaee.version>
 		<surefire-plugin.version>3.0.0-M5</surefire-plugin.version>
 		<dependency-check.version>8.1.2</dependency-check.version>
 		<compiler-plugin.version>3.8.1</compiler-plugin.version>
@@ -21,20 +17,10 @@
 		<maven.compiler.target>17</maven.compiler.target>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<jandex-maven-plugin.version>1.2.3</jandex-maven-plugin.version>
+		<jandex-maven-plugin.version>3.1.2</jandex-maven-plugin.version>
 	</properties>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>${quarkus.platform.group-id}</groupId>
-				<artifactId>${quarkus.platform.artifact-id}</artifactId>
-				<version>${quarkus.platform.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+
 
 	<dependencies>
 
@@ -77,6 +63,7 @@
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
+			<version>2.13.0</version>
 		</dependency>
 
 		<dependency>
@@ -88,45 +75,54 @@
 		<dependency>
 			<groupId>io.quarkiverse.tika</groupId>
 			<artifactId>quarkus-tika</artifactId>
+	        <version>2.0.2</version>
 		</dependency>
+
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
+			<version>3.13.0</version>
 		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
+			<version>2.15.2</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
+			<version>2.0.7</version>
 		</dependency>
 
 		<!-- Test START -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.10.0</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
 			<artifactId>junit-jupiter</artifactId>
+			<version>5.10.0</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-core</artifactId>
+			<version>1.4.9</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
+			<version>5.4.0</version>
 			<scope>test</scope>
 		</dependency>
 		<!-- Test ENDE -->
@@ -144,9 +140,8 @@
 					<target>${maven.compiler.target}</target>
 				</configuration>
 			</plugin>
-
 			<plugin>
-				<groupId>org.jboss.jandex</groupId>
+				<groupId>io.smallrye</groupId>
 				<artifactId>jandex-maven-plugin</artifactId>
 				<version>${jandex-maven-plugin.version}</version>
 				<executions>
@@ -211,7 +206,6 @@
 					<execution>
 						<phase>package</phase>
 						<goals>
-							<goal>purge</goal>
 							<goal>check</goal>
 						</goals>
 					</execution>

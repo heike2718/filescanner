@@ -66,6 +66,28 @@ public class TikaMediaTypeServiceImplTest {
 		}
 
 		@Test
+		void should_detectExcelOld() {
+
+			// Arrange
+			String filename = "excel_altes_format.xls";
+			Upload upload = new Upload().withName(filename)
+				.withData(TestFileUtils.loadDataQuietly("/" + filename));
+
+			TikaMediaTypeServiceImpl service = new TikaMediaTypeServiceImpl();
+
+			// Act
+			String mediaType = service.detectMediaType(upload);
+
+			System.out.println("\n");
+			System.out.println(filename);
+			System.out.println(mediaType);
+
+			// Assert
+			assertEquals("application/vnd.ms-excel", mediaType);
+
+		}
+
+		// @Test
 		void should_complain_aboutExcelAltesFormat() {
 
 			// Arrange
@@ -78,7 +100,8 @@ public class TikaMediaTypeServiceImplTest {
 			// Act
 			try {
 
-				service.detectMediaType(upload);
+				String detectedMediaType = service.detectMediaType(upload);
+				System.out.println(detectedMediaType);
 				fail("kein NoSuchFieldError");
 			} catch (NoSuchFieldError e) {
 

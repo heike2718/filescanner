@@ -7,8 +7,8 @@ package de.egladil.web.filescanner_service.scan.impl;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import de.egladil.web.filescanner_service.clamav.ClamAVService;
 import de.egladil.web.filescanner_service.clamav.VirusDetection;
