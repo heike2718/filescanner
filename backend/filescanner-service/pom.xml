@@ -24,12 +24,13 @@
 
 	<dependencies>
 
+<!--
 		<dependency>
 			<groupId>de.egladil.web</groupId>
 			<artifactId>commons-messager</artifactId>
 			<version>${commons.version}</version>
 		</dependency>
-
+-->
 		<dependency>
 			<groupId>de.egladil.web</groupId>
 			<artifactId>commons-mailer</artifactId>

@@ -4,10 +4,6 @@
 // =====================================================
 package de.egladil.web.filescanner_service.event.impl;
 
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.enterprise.event.Observes;
-import jakarta.inject.Inject;
-
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +11,9 @@ import org.slf4j.LoggerFactory;
 import de.egladil.web.filescanner_service.event.DomainEventService;
 import de.egladil.web.filescanner_service.event.FilescannerDomainEvent;
 import de.egladil.web.filescanner_service.mail.MailService;
-import de.egladil.web.filescanner_service.telegram.TelegramMessageService;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.enterprise.event.Observes;
+import jakarta.inject.Inject;
 
 /**
  * DomainEventHandler
@@ -31,8 +29,8 @@ public class FilescannerDomainEventServiceImpl implements DomainEventService {
 	@ConfigProperty(name = "telegram.activated", defaultValue = "false")
 	String telegramActive;
 
-	@Inject
-	TelegramMessageService telegramService;
+	// @Inject
+	// TelegramMessageService telegramService;
 
 	@Inject
 	MailService mailService;
@@ -60,10 +58,10 @@ public class FilescannerDomainEventServiceImpl implements DomainEventService {
 			mailService.sendMessage(event.getMessagingPreview());
 		}
 
-		if (isTelegramActivated()) {
-
-			telegramService.sendMessage(event.getMessagingPreview());
-		}
+		// if (isTelegramActivated()) {
+		//
+		// telegramService.sendMessage(event.getMessagingPreview());
+		// }
 
 		if (test) {
 
