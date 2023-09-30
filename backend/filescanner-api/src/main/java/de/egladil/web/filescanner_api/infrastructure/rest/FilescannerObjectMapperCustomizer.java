@@ -4,7 +4,7 @@
 // =====================================================
 package de.egladil.web.filescanner_api.infrastructure.rest;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;

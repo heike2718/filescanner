@@ -7,8 +7,8 @@ package de.egladil.web.filescanner_service.scan.impl;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import de.egladil.web.filescanner_service.clamav.ClamAVService;
 import de.egladil.web.filescanner_service.clamav.VirusDetection;
@@ -18,6 +18,7 @@ import de.egladil.web.filescanner_service.scan.ScanService;
 import de.egladil.web.filescanner_service.scan.Upload;
 import de.egladil.web.filescanner_service.securitychecks.ThreadDetection;
 import de.egladil.web.filescanner_service.securitychecks.ZipBombScanner;
+import de.egladil.web.filescanner_service.securitychecks.impl.ZipBombScannerImpl;
 import de.egladil.web.filescanner_service.tika.TikaMediaTypeService;
 
 /**
@@ -44,6 +45,7 @@ public class ScanServiceImpl implements ScanService {
 		ScanServiceImpl result = new ScanServiceImpl();
 		result.clamAVService = ClamAVService.createForIntegrationTest();
 		result.tikaMediaTypeService = TikaMediaTypeService.createForIntegrationTest();
+		result.zipBombScanner = ZipBombScannerImpl.createForTest();
 		return result;
 
 	}
@@ -74,7 +76,7 @@ public class ScanServiceImpl implements ScanService {
 			}
 
 			ScanResult result = new ScanResult().withUserID(ownerId).withUploadName(upload.getName()).withMediaType(mediaType)
-				.withThreadDetection(threadDetection);
+				.withThreadDetection(threadDetection).withVirusDetection(VirusDetection.FALSE);
 
 			return result;
 		} finally {

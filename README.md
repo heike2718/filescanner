@@ -22,6 +22,15 @@ There shoud be a clamav installation at the server as for instance [mko-x/docker
 
 In addition to setting this up as microservice, the filescanner-service can be used as jar-dependency as is in order to avoid RESTClient communication overhead.
 
+## API
+
+The ClamAVService provides 2 methods:
+
+* checkAlive: returns true when the VirusScanner can be reached. This method can be used for HealthChecks.
+
+* scanFile: performs a virus check of a ScanRequestPayload
+
+
 ## Releasenotes
 
 [Release-Notes](RELEASE-NOTES.md)

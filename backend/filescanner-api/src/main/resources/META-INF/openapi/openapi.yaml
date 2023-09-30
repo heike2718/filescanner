@@ -1,0 +1,161 @@
+---
+openapi: 3.0.3
+info:
+  title: filescanner
+  description: API zum Scannen von Fileuploads auf Viren und anderes �bles Zeug.
+  contact:
+    name: Heike Winkelvo�
+    url: https://mathe-jung-alt.de
+    email: info.heike@egladil.de
+  license:
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 6.0.0
+servers:
+- url: http://localhost:9800
+  description: Auto generated value
+- url: http://0.0.0.0:9800
+  description: Auto generated value
+paths:
+  /files/detection/v1:
+    post:
+      tags:
+      - Filescanner Resource
+      summary: Es wird auf Viren und Zip-Bomben geprüft
+      operationId: scant ein File auf Threads
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ScanRequestPayload'
+      responses:
+        "200":
+          description: Scan fertig
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScanResult'
+        "401":
+          description: wenn der 'X-CLIENT-ID'- Header fehlt
+        "500":
+          description: Serverfehler
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessagePayload'
+  /files/hello:
+    get:
+      tags:
+      - Filescanner Resource
+      summary: "Generiert ein JSON-Objekt mit allen Aufgaben und Lösungen der Rätselgruppe,\
+        \ die durch die fachlichen Parameter eindeutig bestimmt ist. Das ist eine\
+        \ Methode, um auf die Minikänguru-Wettbewerbe zuzugreifen, ohne deren ID zu\
+        \ kennen. Die API liefert nur Quiz mit dem Status FREIGEGEBEN zurück."
+      operationId: generateQuizWithUniqueKey
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessagePayload'
+        "500":
+          description: Serverfehler
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessagePayload'
+  /files/ping/v1:
+    get:
+      tags:
+      - Filescanner Resource
+      summary: Es wird auf Viren und Zip-Bomben geprüft
+      operationId: "prüft, ob ClamAV erreichbar ist"
+      parameters:
+      - name: X-CLIENT-ID
+        in: header
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: Quiz erfolgreich geladen
+        "401":
+          description: wenn mit einer unbekannten Client-ID aufgerufen wurde
+        "500":
+          description: Serverfehler
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MessagePayload'
+  /ping:
+    get:
+      tags:
+      - Ping Resource
+      responses:
+        "200":
+          description: OK
+components:
+  schemas:
+    MessagePayload:
+      type: object
+      properties:
+        level:
+          type: string
+        message:
+          type: string
+      xml:
+        name: gesamtpunktverteilung
+    ScanRequestPayload:
+      description: "Payload mit einem File, das auf Viren geprüft werden soll."
+      required:
+      - clientId
+      - upload
+      type: object
+      properties:
+        clientId:
+          type: string
+        fileOwner:
+          type: string
+        upload:
+          $ref: '#/components/schemas/Upload'
+    ScanResult:
+      description: Ergebnisse des Scans
+      type: object
+      properties:
+        userID:
+          type: string
+        uploadName:
+          type: string
+        mediaType:
+          type: string
+        virusDetection:
+          $ref: '#/components/schemas/VirusDetection'
+        threadDetection:
+          $ref: '#/components/schemas/ThreadDetection'
+    ThreadDetection:
+      type: object
+      properties:
+        securityThreadDetected:
+          type: boolean
+        securityCheckMessage:
+          type: string
+    Upload:
+      description: Das zu scannende File. Daten sind base64-encodet
+      type: object
+      properties:
+        name:
+          type: string
+        dataBase64:
+          type: string
+    VirusDetection:
+      type: object
+      properties:
+        virusDetected:
+          type: boolean
+        scannerMessage:
+          type: string
+  securitySchemes:
+    SecurityScheme:
+      type: http
+      description: Authentication
+      scheme: basic

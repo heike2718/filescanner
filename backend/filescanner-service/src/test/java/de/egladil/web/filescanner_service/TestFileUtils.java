@@ -14,6 +14,8 @@ public class TestFileUtils {
 
 	public static byte[] loadDataQuietly(final String classpathLocation) {
 
+		System.out.println(classpathLocation);
+
 		try (InputStream in = TestFileUtils.class.getResourceAsStream(classpathLocation)) {
 
 			return in.readAllBytes();

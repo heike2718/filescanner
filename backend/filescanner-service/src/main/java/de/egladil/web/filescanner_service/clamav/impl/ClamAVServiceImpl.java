@@ -6,8 +6,8 @@ package de.egladil.web.filescanner_service.clamav.impl;
 
 import java.util.Base64;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
@@ -32,13 +32,13 @@ public class ClamAVServiceImpl implements ClamAVService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ClamAVServiceImpl.class);
 
-	@ConfigProperty(name = "clamav.host")
+	@ConfigProperty(name = "clamav.host", defaultValue = "localhost")
 	String host = null;
 
 	@ConfigProperty(name = "clamav.port", defaultValue = "3310")
 	String portAsString = null;
 
-	@ConfigProperty(name = "clamav.timeout", defaultValue = "5000")
+	@ConfigProperty(name = "clamav.timeout", defaultValue = "10000")
 	String timeoutAsString = null;
 
 	@Inject
@@ -49,13 +49,30 @@ public class ClamAVServiceImpl implements ClamAVService {
 		ClamAVServiceImpl result = new ClamAVServiceImpl();
 		result.host = "172.20.0.2";
 		result.portAsString = "3310";
-		result.timeoutAsString = "5000";
+		result.timeoutAsString = "10000";
 		result.domainEventService = FilescannerDomainEventServiceImpl.createForIntegrationTests();
 		return result;
 	}
 
 	@Override
+	public boolean checkAlive() {
+
+		try {
+
+			ClamAVClient clamAVClient = new ClamAVClient(host, Integer.valueOf(portAsString), Integer.valueOf(timeoutAsString));
+
+			return clamAVClient.ping();
+		} catch (Exception e) {
+
+			LOGGER.error("Unerwartete Exception: " + e.getMessage(), e);
+			return false;
+		}
+	}
+
+	@Override
 	public VirusDetection scanFile(final ScanRequestPayload scanRequestPayload) {
+
+		LOGGER.info("sending File to host={}, port={}", host, portAsString);
 
 		Upload upload = scanRequestPayload.getUpload();
 		String ownerId = scanRequestPayload.getFileOwner();
@@ -86,7 +103,7 @@ public class ClamAVServiceImpl implements ClamAVService {
 
 		} catch (Exception e) {
 
-			LOGGER.error("Unerwartete Exception: " + e.getMessage(), e);
+			LOGGER.error(e.getClass().getSimpleName() + " beim Scannen: clamav-Konfiguration pruefen! " + e.getMessage(), e);
 			throw new FilescannerRuntimeException(
 				"Unerwartete Exception beim Scannen des Files " + upload.getName() + ": clientId="
 					+ StringUtils.abbreviate(scanRequestPayload.getClientId(), 11) + ", ownerId" + ownerId);

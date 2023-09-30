@@ -21,6 +21,11 @@ public interface ClamAVService {
 	 */
 	VirusDetection scanFile(ScanRequestPayload scanRequestPayload);
 
+	/**
+	 * @return boolean
+	 */
+	boolean checkAlive();
+
 	static ClamAVService createForIntegrationTest() {
 
 		return ClamAVServiceImpl.createForLocalTests();

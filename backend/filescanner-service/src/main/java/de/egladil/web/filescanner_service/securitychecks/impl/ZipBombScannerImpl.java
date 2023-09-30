@@ -4,8 +4,8 @@
 // =====================================================
 package de.egladil.web.filescanner_service.securitychecks.impl;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 
@@ -29,6 +29,13 @@ public class ZipBombScannerImpl implements ZipBombScanner {
 	@Inject
 	DomainEventService domainEventService;
 
+	public static ZipBombScannerImpl createForTest() {
+
+		ZipBombScannerImpl result = new ZipBombScannerImpl();
+		result.maxExpectedCompressionRatioStr = "100";
+		return result;
+	}
+
 	@Override
 	public ThreadDetection checkForZipBomb(final ScanRequestPayload scanRequestPayload) {
 
@@ -44,7 +51,11 @@ public class ZipBombScannerImpl implements ZipBombScanner {
 			ZipBombDetected event = new ZipBombDetected().withCompressionRatio(compressionRatio).withFileName(upload.getName())
 				.withOwnerId(ownerId).withClientId(scanRequestPayload.getClientId());
 
-			domainEventService.handleDomainEvent(event);
+			if (domainEventService != null) {
+
+				domainEventService.handleDomainEvent(event);
+
+			}
 
 			return ThreadDetection.TRUE.withSecurityCheckMessage("Verdacht auf ZIP-Bombe");
 		}

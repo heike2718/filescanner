@@ -7,11 +7,16 @@ package de.egladil.web.filescanner_api.domain.auth;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Base64;
+
 import org.junit.jupiter.api.Test;
+
+import io.quarkus.test.junit.QuarkusTest;
 
 /**
  * ClientIdFilterTest
  */
+@QuarkusTest
 public class ClientIdFilterTest {
 
 	private static final String CLIENT_IDS = "Erste,Zweite";
@@ -66,6 +71,15 @@ public class ClientIdFilterTest {
 
 		// Assert
 		assertFalse(result);
+	}
+
+	@Test
+	void encode() {
+
+		String data = "X5O!P%@AP[4\\PZX54(P^)7CC)7}$EICAR-STANDARD-ANTIVIRUS-TEST-FILE!$H+H*";
+		String encoded = Base64.getEncoder().encodeToString(data.getBytes());
+
+		System.out.println(encoded);
 	}
 
 }
