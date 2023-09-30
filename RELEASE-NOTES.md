@@ -1,5 +1,11 @@
 # filescanner Rease Notes
 
+__Release 6.0.0:__
+
+filescanner-service ist als deprecated for removal markiert und wird gelöscht, wenn minikaenguru auf REST umgestellt wurde.
+
+filescanner-api als Microservice mit integriertem nextav in einem docker-compose.
+
 __Release 2.1.0:__
 
 checkAlive-Methode, die ein ping an den ClamAV-Service sendet und so prüft, ob dieser erreichbar ist.
