@@ -18,12 +18,6 @@ Authorized client applications are allowed to use it. The clients are checked by
 
 There shoud be a clamav installation at the server as for instance [mko-x/docker-clamav](https://github.com/mko-x/docker-clamav).
 
-## Usage as library
-
-__usage as library is not longer recommended as the filescanner-service will be removed__
-
-In addition to setting this up as microservice, the filescanner-service can be used as jar-dependency as is in order to avoid RESTClient communication overhead.
-
 ## API
 
 The ClamAVService provides 2 methods:
@@ -32,6 +26,12 @@ The ClamAVService provides 2 methods:
 
 * scanFile: performs a virus check of a ScanRequestPayload
 
+[Open-API](./filescanner-api/src/main/resources/META-INF/openapi/openapi.yaml)
+
+
+## Development
+
+In order do setup development, please read about the [requirements rearding the infrastructure](./filescanner-api/README.md).
 
 ## Releasenotes
 
