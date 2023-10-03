@@ -26,7 +26,7 @@ The ClamAVService provides 2 methods:
 
 * scanFile: performs a virus check of a ScanRequestPayload
 
-[Open-API](./filescanner-api/src/main/resources/META-INF/openapi)
+[Open-API](./filescanner-api/src/main/resources/META-INF/openapi/swagger.json)
 
 
 ## Development
