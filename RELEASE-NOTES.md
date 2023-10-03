@@ -1,5 +1,9 @@
 # filescanner Rease Notes
 
+__without version__
+
+filescanner-service deleted. It depends on other libraries that will be removed.
+
 __Release 6.0.0:__
 
 filescanner-service ist als deprecated for removal markiert und wird gelöscht, wenn minikaenguru auf REST umgestellt wurde.
