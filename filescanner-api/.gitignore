@@ -37,4 +37,7 @@ nb-configuration.xml
 
 # Local environment
 .env
-.java-version
+
+# generated files
+src/main/resources/META-INF/openapi/openapi.json
+src/main/resources/META-INF/openapi/openapi.yaml
