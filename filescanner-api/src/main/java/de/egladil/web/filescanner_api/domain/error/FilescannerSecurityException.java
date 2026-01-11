@@ -9,18 +9,18 @@ package de.egladil.web.filescanner_api.domain.error;
  */
 public class FilescannerSecurityException extends RuntimeException {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * @param message
-	 */
-	public FilescannerSecurityException(final String message) {
+    /**
+     * @param message
+     */
+    public FilescannerSecurityException(final String message) {
 
-		super(message);
+        super(message);
 
-	}
+    }
 
 }

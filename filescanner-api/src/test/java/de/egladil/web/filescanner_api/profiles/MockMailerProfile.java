@@ -11,11 +11,11 @@ import io.quarkus.test.junit.QuarkusTestProfile;
  */
 public class MockMailerProfile implements QuarkusTestProfile {
 
-	@Override
-	public String getConfigProfile() {
+    @Override
+    public String getConfigProfile() {
 
-		// aus application.properties
-		return "mock-mailbox-test";
-	}
+        // aus application.properties
+        return "mock-mailbox-test";
+    }
 
 }

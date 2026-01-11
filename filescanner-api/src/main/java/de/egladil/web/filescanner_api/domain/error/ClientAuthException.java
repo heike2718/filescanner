@@ -9,9 +9,9 @@ package de.egladil.web.filescanner_api.domain.error;
  */
 public class ClientAuthException extends RuntimeException {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
 }

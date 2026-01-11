@@ -14,76 +14,76 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class ZipBombDetected extends AbstractFilescannerDomainEvent {
 
-	@JsonProperty
-	private String clientId;
+    @JsonProperty
+    private String clientId;
 
-	@JsonProperty
-	private String ownerId;
+    @JsonProperty
+    private String ownerId;
 
-	@JsonProperty
-	private String fileName;
+    @JsonProperty
+    private String fileName;
 
-	@JsonProperty
-	private long compressionRatio;
+    @JsonProperty
+    private long compressionRatio;
 
-	@Override
-	@JsonIgnore
-	public String typeName() {
+    @Override
+    @JsonIgnore
+    public String typeName() {
 
-		return FilescannerEventType.ZIP_BOMB_DETECTED.getLabel();
-	}
+        return FilescannerEventType.ZIP_BOMB_DETECTED.getLabel();
+    }
 
-	@Override
-	@JsonIgnore
-	public String getMessagingPreview() {
+    @Override
+    @JsonIgnore
+    public String getMessagingPreview() {
 
-		return "ZipBombDetected [clientId=" + StringUtils.abbreviate(clientId, 11) + ", ownerId="
-			+ StringUtils.abbreviate(ownerId, 11) + ", fileName=" + fileName + ", compressionRatio="
-			+ compressionRatio + "]";
-	}
+        return "ZipBombDetected [clientId=" + StringUtils.abbreviate(clientId, 11) + ", ownerId="
+                + StringUtils.abbreviate(ownerId, 11) + ", fileName=" + fileName + ", compressionRatio="
+                + compressionRatio + "]";
+    }
 
-	public String getOwnerId() {
+    public String getOwnerId() {
 
-		return ownerId;
-	}
+        return ownerId;
+    }
 
-	public ZipBombDetected withOwnerId(final String ownerId) {
+    public ZipBombDetected withOwnerId(final String ownerId) {
 
-		this.ownerId = ownerId;
-		return this;
-	}
+        this.ownerId = ownerId;
+        return this;
+    }
 
-	public String getFileName() {
+    public String getFileName() {
 
-		return fileName;
-	}
+        return fileName;
+    }
 
-	public ZipBombDetected withFileName(final String fileName) {
+    public ZipBombDetected withFileName(final String fileName) {
 
-		this.fileName = fileName;
-		return this;
-	}
+        this.fileName = fileName;
+        return this;
+    }
 
-	public long getCompressionRatio() {
+    public long getCompressionRatio() {
 
-		return compressionRatio;
-	}
+        return compressionRatio;
+    }
 
-	public ZipBombDetected withCompressionRatio(final long compressionRatio) {
+    public ZipBombDetected withCompressionRatio(final long compressionRatio) {
 
-		this.compressionRatio = compressionRatio;
-		return this;
-	}
+        this.compressionRatio = compressionRatio;
+        return this;
+    }
 
-	public String getClientId() {
+    public String getClientId() {
 
-		return clientId;
-	}
+        return clientId;
+    }
 
-	public ZipBombDetected withClientId(final String clientId) {
+    public ZipBombDetected withClientId(final String clientId) {
 
-		this.clientId = StringUtils.abbreviate(clientId, 11);
-		return this;
-	}
+        this.clientId = StringUtils.abbreviate(clientId, 11);
+        return this;
+    }
 
 }

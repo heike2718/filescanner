@@ -9,14 +9,14 @@ package de.egladil.web.filescanner_api.domain.error;
  */
 public class UnsupportedUnzipOperationException extends RuntimeException {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	public UnsupportedUnzipOperationException(final String message) {
+    public UnsupportedUnzipOperationException(final String message) {
 
-		super(message);
+        super(message);
 
-	}
+    }
 }

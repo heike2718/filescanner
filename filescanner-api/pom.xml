@@ -10,18 +10,22 @@
 	<version>6.1.0</version>
 
 	<properties>
-		<compiler-plugin.version>3.10.1</compiler-plugin.version>
-		<failsafe.useModulePath>false</failsafe.useModulePath>
-		<maven.compiler.release>21</maven.compiler.release>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<quarkus.platform.artifact-id>quarkus-bom</quarkus.platform.artifact-id>
-		<quarkus.platform.group-id>io.quarkus</quarkus.platform.group-id>
-		<quarkus.platform.version>3.21.1</quarkus.platform.version>
-		<clamav.version>1.0.1</clamav.version>
-		<quarkus.tika.version>2.1.0</quarkus.tika.version>
-		<surefire-plugin.version>3.2.5</surefire-plugin.version>
-		<dependency-check.version>12.1.0</dependency-check.version>
+		<quarkus.platform.group-id>io.quarkus.platform</quarkus.platform.group-id>
+		<quarkus.platform.version>3.30.6</quarkus.platform.version>
+
+		<clamav.version>2.1.2</clamav.version>
+		<quarkus.tika.version>2.3.0</quarkus.tika.version>
+
+		<mixin-maven-plugin.version>1.0.6</mixin-maven-plugin.version>
+		<egladil-maven-mixins.version>1.0.1</egladil-maven-mixins.version>
+
+		<!-- Start mixin-properties -->
+		<maven.compiler.release>21</maven.compiler.release>
+
+		<java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
+		<maven.compiler.parameters>true</maven.compiler.parameters>
+		<!-- Ende mixin-propetries -->
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -47,7 +51,7 @@
 		</dependency>
 
 		<dependency>
-			<groupId>fi.solita.clamav</groupId>
+			<groupId>xyz.capybara</groupId>
 			<artifactId>clamav-client</artifactId>
 			<version>${clamav.version}</version>
 		</dependency>
@@ -138,17 +142,6 @@
 	<build>
 		<plugins>
 			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${compiler-plugin.version}</version>
-				<configuration>
-					<source>${maven.compiler.release}</source>
-					<target>${maven.compiler.relese}</target>
-					<compilerArgs>
-						<arg>-parameters</arg>
-					</compilerArgs>
-				</configuration>
-			</plugin>
-			<plugin>
 				<groupId>${quarkus.platform.group-id}</groupId>
 				<artifactId>quarkus-maven-plugin</artifactId>
 				<version>${quarkus.platform.version}</version>
@@ -165,102 +158,61 @@
 			</plugin>
 
 			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>${surefire-plugin.version}</version>
+				<groupId>com.playtika.maven.plugins</groupId>
+				<artifactId>mixin-maven-plugin</artifactId>
+				<version>${mixin-maven-plugin.version}</version>
+				<extensions>true</extensions>
+				<configuration>
+					<mixins>
+						<mixin>
+							<groupId>de.egladil</groupId>
+							<artifactId>java-core-mixin</artifactId>
+							<version>${egladil-maven-mixins.version}</version>
+						</mixin>
+						<mixin>
+							<groupId>de.egladil</groupId>
+							<artifactId>java-linting-mixin</artifactId>
+							<version>${egladil-maven-mixins.version}</version>
+						</mixin>
+						<mixin>
+							<groupId>de.egladil</groupId>
+							<artifactId>java-code-quality-mixin</artifactId>
+							<version>${egladil-maven-mixins.version}</version>
+						</mixin>
+						<mixin>
+							<groupId>de.egladil</groupId>
+							<artifactId>java-quarkustest-coverage-mixin</artifactId>
+							<version>${egladil-maven-mixins.version}</version>
+						</mixin>
+						<mixin>
+							<groupId>de.egladil</groupId>
+							<artifactId>java-security-mixin</artifactId>
+							<version>${egladil-maven-mixins.version}</version>
+						</mixin>
+					</mixins>
+				</configuration>
 			</plugin>
 
 			<plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${surefire-plugin.version}</version>
-                <configuration>
-                    <excludedGroups>integration</excludedGroups>
-                    <systemPropertyVariables>
-                        <java.util.logging.manager>org.jboss.logmanager.LogManager</java.util.logging.manager>
-                        <maven.home>${maven.home}</maven.home>
-                    </systemPropertyVariables>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>integration-tests</id>
-                        <phase>integration-test</phase>
-                        <goals>
-                            <goal>test</goal>
-                        </goals>
-                        <configuration>
-                            <excludedGroups>!integration</excludedGroups>
-                            <groups>integration</groups>
-                            <systemPropertyVariables>
-                                <jacoco-agent.destfile>${project.build.directory}/jacoco-quarkus.exec</jacoco-agent.destfile>
-                            </systemPropertyVariables>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-			<plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.10</version>
-                <executions>
-                    <execution>
-                        <id>default-prepare-agent</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
-                        </goals>
-                        <configuration>
-                            <exclClassLoaders>*QuarkusClassLoader</exclClassLoaders>
-                            <destFile>${project.build.directory}/jacoco-quarkus.exec</destFile>
-                            <append>true</append>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>report</id>
-                        <phase>post-integration-test</phase>
-                        <goals>
-                            <goal>report</goal>
-                        </goals>
-                        <configuration>
-                            <dataFile>${project.build.directory}/jacoco-quarkus.exec</dataFile>
-                            <outputDirectory>${project.build.directory}/jacoco-report</outputDirectory>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>jacoco-check</id>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                        <phase>post-integration-test</phase>
-                        <configuration>
-                            <dataFile>${project.build.directory}/jacoco-quarkus.exec</dataFile>
-                            <rules>
-                                <rule>
-                                    <element>BUNDLE</element>
-                                    <limits>
-                                        <limit>
-                                            <counter>LINE</counter>
-                                            <value>COVEREDRATIO</value>
-                                            <minimum>0.8</minimum>
-                                        </limit>
-                                        <limit>
-                                            <counter>BRANCH</counter>
-                                            <value>COVEREDRATIO</value>
-                                            <minimum>0.8</minimum>
-                                        </limit>
-                                    </limits>
-                                </rule>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-			<plugin>
-				<groupId>org.owasp</groupId>
-				<artifactId>dependency-check-maven</artifactId>
-				<version>${dependency-check.version}</version>
+				<groupId>com.rudikershaw.gitbuildhook</groupId>
+				<artifactId>git-build-hook-maven-plugin</artifactId>
+				<version>3.6.0</version>
+				<configuration>
+					<gitConfig>
+						<!-- The location of the directory you are using to
+						store the Git hooks in your project. -->
+						<core.hooksPath>../.git-hooks/</core.hooksPath>
+						<!-- Some other project specific git config that you
+						want to set. -->
+						<custom.configuration>true</custom.configuration>
+					</gitConfig>
+				</configuration>
 				<executions>
 					<execution>
-						<phase>package</phase>
 						<goals>
-							<goal>check</goal>
+							<!-- Sets git config specified under configuration >
+							gitConfig. -->
+							<goal>configure</goal>
 						</goals>
 					</execution>
 				</executions>

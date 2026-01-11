@@ -17,74 +17,74 @@ import de.egladil.web.filescanner_api.domain.securitychecks.ThreadDetection;
 @Schema(description = "Ergebnisse des Scans")
 public class ScanResult {
 
-	@JsonProperty
-	private String userID;
+    @JsonProperty
+    private String userID;
 
-	@JsonProperty
-	private String uploadName;
+    @JsonProperty
+    private String uploadName;
 
-	@JsonProperty
-	private String mediaType;
+    @JsonProperty
+    private String mediaType;
 
-	@JsonProperty
-	private VirusDetection virusDetection;
+    @JsonProperty
+    private VirusDetection virusDetection;
 
-	@JsonProperty
-	private ThreadDetection threadDetection;
+    @JsonProperty
+    private ThreadDetection threadDetection;
 
-	public String getMediaType() {
+    public String getMediaType() {
 
-		return mediaType;
-	}
+        return mediaType;
+    }
 
-	public ScanResult withMediaType(final String mediaType) {
+    public ScanResult withMediaType(final String mediaType) {
 
-		this.mediaType = mediaType;
-		return this;
-	}
+        this.mediaType = mediaType;
+        return this;
+    }
 
-	public VirusDetection getVirusDetection() {
+    public VirusDetection getVirusDetection() {
 
-		return virusDetection;
-	}
+        return virusDetection;
+    }
 
-	public ScanResult withVirusDetection(final VirusDetection virusDetection) {
+    public ScanResult withVirusDetection(final VirusDetection virusDetection) {
 
-		this.virusDetection = virusDetection;
-		return this;
-	}
+        this.virusDetection = virusDetection;
+        return this;
+    }
 
-	public String getUserID() {
+    public String getUserID() {
 
-		return userID;
-	}
+        return userID;
+    }
 
-	public ScanResult withUserID(final String userID) {
+    public ScanResult withUserID(final String userID) {
 
-		this.userID = userID;
-		return this;
-	}
+        this.userID = userID;
+        return this;
+    }
 
-	public String getUploadName() {
+    public String getUploadName() {
 
-		return uploadName;
-	}
+        return uploadName;
+    }
 
-	public ScanResult withUploadName(final String uploadName) {
+    public ScanResult withUploadName(final String uploadName) {
 
-		this.uploadName = uploadName;
-		return this;
-	}
+        this.uploadName = uploadName;
+        return this;
+    }
 
-	public ThreadDetection getThreadDetection() {
+    public ThreadDetection getThreadDetection() {
 
-		return threadDetection;
-	}
+        return threadDetection;
+    }
 
-	public ScanResult withThreadDetection(final ThreadDetection threadDetection) {
+    public ScanResult withThreadDetection(final ThreadDetection threadDetection) {
 
-		this.threadDetection = threadDetection;
-		return this;
-	}
+        this.threadDetection = threadDetection;
+        return this;
+    }
 
 }

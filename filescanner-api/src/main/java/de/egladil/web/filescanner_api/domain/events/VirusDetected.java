@@ -14,82 +14,82 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class VirusDetected extends AbstractFilescannerDomainEvent {
 
-	@JsonProperty
-	private String clientId;
+    @JsonProperty
+    private String clientId;
 
-	@JsonProperty
-	private String ownerId;
+    @JsonProperty
+    private String ownerId;
 
-	@JsonProperty
-	private String fileName;
+    @JsonProperty
+    private String fileName;
 
-	@JsonProperty
-	private String virusScannerMessage;
+    @JsonProperty
+    private String virusScannerMessage;
 
-	@Override
-	public String toString() {
+    @Override
+    public String toString() {
 
-		return "VirusDetected [clientId=" + clientId + ", ownerId=" + ownerId + ", fileName=" + fileName + ", virusScannerMessage="
-			+ virusScannerMessage + "]";
-	}
+        return "VirusDetected [clientId=" + clientId + ", ownerId=" + ownerId + ", fileName=" + fileName
+                + ", virusScannerMessage=" + virusScannerMessage + "]";
+    }
 
-	@Override
-	@JsonIgnore
-	public String typeName() {
+    @Override
+    @JsonIgnore
+    public String typeName() {
 
-		return FilescannerEventType.VIRUS_DETECTD.getLabel();
-	}
+        return FilescannerEventType.VIRUS_DETECTD.getLabel();
+    }
 
-	public String getOwnerId() {
+    public String getOwnerId() {
 
-		return ownerId;
-	}
+        return ownerId;
+    }
 
-	public VirusDetected withOwnerId(final String ownerId) {
+    public VirusDetected withOwnerId(final String ownerId) {
 
-		this.ownerId = ownerId;
-		return this;
-	}
+        this.ownerId = ownerId;
+        return this;
+    }
 
-	public String getVirusScannerMessage() {
+    public String getVirusScannerMessage() {
 
-		return virusScannerMessage;
-	}
+        return virusScannerMessage;
+    }
 
-	public VirusDetected withVirusScannerMessage(final String virusScannerMessage) {
+    public VirusDetected withVirusScannerMessage(final String virusScannerMessage) {
 
-		this.virusScannerMessage = virusScannerMessage;
-		return this;
-	}
+        this.virusScannerMessage = virusScannerMessage;
+        return this;
+    }
 
-	public String getFileName() {
+    public String getFileName() {
 
-		return fileName;
-	}
+        return fileName;
+    }
 
-	public VirusDetected withFileName(final String fileName) {
+    public VirusDetected withFileName(final String fileName) {
 
-		this.fileName = fileName;
-		return this;
-	}
+        this.fileName = fileName;
+        return this;
+    }
 
-	@Override
-	@JsonIgnore
-	public String getMessagingPreview() {
+    @Override
+    @JsonIgnore
+    public String getMessagingPreview() {
 
-		return "VirusDetected [clientId=" + StringUtils.abbreviate(clientId, 11) + ", ownerId="
-			+ StringUtils.abbreviate(ownerId, 11) + ", fileName=" + fileName + ", virusScannerMessage="
-			+ virusScannerMessage + "]";
-	}
+        return "VirusDetected [clientId=" + StringUtils.abbreviate(clientId, 11) + ", ownerId="
+                + StringUtils.abbreviate(ownerId, 11) + ", fileName=" + fileName + ", virusScannerMessage="
+                + virusScannerMessage + "]";
+    }
 
-	public String getClientId() {
+    public String getClientId() {
 
-		return clientId;
-	}
+        return clientId;
+    }
 
-	public VirusDetected withClientId(final String clientId) {
+    public VirusDetected withClientId(final String clientId) {
 
-		this.clientId = StringUtils.abbreviate(clientId, 11);
-		return this;
-	}
+        this.clientId = StringUtils.abbreviate(clientId, 11);
+        return this;
+    }
 }

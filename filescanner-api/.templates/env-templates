@@ -6,9 +6,8 @@ STAGE=dev
 
 QUARKUS_HTTP_PORT=9800
 
-## kommaseparierte Liste von ClientIds, die diesen Service benutzen dürfen (mja und minikaenguru)
-CLIENTIDS=NBptB82KjFkelkF55Aq4SmQSL3DXZHHurbe7l5W9LT7U,k7AxUVYzr1FBAvD8e99orRqKqx4jBwcr7Dmgn5jdBf8J,N7SsGenun4znNUdQzyLD0wzOfRHOmc9XN35TOGfbBcvA
-
+## kommaseparierte Liste von ClientIds, die diesen Service benutzen dürfen (MinikänguruAdmin,MinikänguruApp,Rätselbaukasten,Fileshare)
+CLIENTIDS=kommaseparierte Liste von ClientIds, die diesen Service benutzen dürfen aus der DEV-DB (MinikänguruAdmin,MinikänguruApp,Rätselbaukasten,Fileshare)
 # --------------------------------------------------------------------------------
 #           ClamAV
 # --------------------------------------------------------------------------------

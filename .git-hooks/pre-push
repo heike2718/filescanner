@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+set -e
+
+BACKEND_DIR="filescanner-api"
+
+echo "🚀 Running comprehensive pre-push checks..."
+
+# BACKEND: verify (Tests + Quality Gates)
+if [ -d "$BACKEND_DIR" ]; then
+  echo "☕ Backend: mvn verify (tests + quality gates)"
+  (cd "$BACKEND_DIR" && mvn -q verify)
+fi
+
+echo "✅ All pre-push checks passed!"
+exit 0

@@ -15,31 +15,31 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public abstract class AbstractFilescannerDomainEvent implements FilescannerDomainEvent {
 
-	@JsonIgnore
-	private final LocalDateTime occuredOn;
+    @JsonIgnore
+    private final LocalDateTime occuredOn;
 
-	protected AbstractFilescannerDomainEvent() {
+    protected AbstractFilescannerDomainEvent() {
 
-		this.occuredOn = LocalDateTime.now();
-	}
+        this.occuredOn = LocalDateTime.now();
+    }
 
-	@Override
-	public LocalDateTime occuredOn() {
+    @Override
+    public LocalDateTime occuredOn() {
 
-		return occuredOn;
-	}
+        return occuredOn;
+    }
 
-	@Override
-	public String serializeQuietly() {
+    @Override
+    public String serializeQuietly() {
 
-		try {
+        try {
 
-			String body = new ObjectMapper().writeValueAsString(this);
-			return typeName() + ": " + body;
-		} catch (JsonProcessingException e) {
+            String body = new ObjectMapper().writeValueAsString(this);
+            return typeName() + ": " + body;
+        } catch (JsonProcessingException e) {
 
-			e.printStackTrace();
-			return e.getMessage();
-		}
-	}
+            e.printStackTrace();
+            return e.getMessage();
+        }
+    }
 }
