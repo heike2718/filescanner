@@ -39,11 +39,5 @@ TELEGRAM_CHATID = 1111111
 # --------------------------------------------------------------------------------
 #           Logging
 # --------------------------------------------------------------------------------
-QUARKUS_LOG_CONSOLE_FORMAT=%d{yyyy-MM-dd HH:mm:ss,SSS} %p (%t) clientId=%X{clientId}, correlationId=%X{correlationId}, [%c:%L] %s%e%n
-QUARKUS_LOG_LEVEL=WARN
-
-QUARKUS_LOG_FILE_ENABLE=false
-QUARKUS_LOG_FILE_LEVEL=WARN
-
-QUARKUS_HTTP_ACCESS-LOG_ENABLED = true
-QUARKUS_HTTP_ACCESS-LOG_LOG-TO-FILE = false
+QUARKUS_LOG_FILE=false
+QUARKUS_HTTP_ACCESS_LOG_ENABLED=false

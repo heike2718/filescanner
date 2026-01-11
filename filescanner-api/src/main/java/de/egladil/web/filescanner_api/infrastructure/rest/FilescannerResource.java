@@ -16,6 +16,8 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
+import java.text.MessageFormat;
+
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.media.Content;
@@ -31,6 +33,7 @@ import de.egladil.web.filescanner_api.domain.MessagePayload;
 import de.egladil.web.filescanner_api.domain.auth.FilescannerAuthService;
 import de.egladil.web.filescanner_api.domain.clamav.ClamAVService;
 import de.egladil.web.filescanner_api.domain.error.ClientAuthException;
+import de.egladil.web.filescanner_api.domain.error.UnsupportedVersionException;
 import de.egladil.web.filescanner_api.domain.scan.ScanRequestPayload;
 import de.egladil.web.filescanner_api.domain.scan.ScanResult;
 import de.egladil.web.filescanner_api.domain.scan.ScanService;
@@ -39,7 +42,13 @@ import de.egladil.web.filescanner_api.domain.scan.ScanService;
 @Produces(MediaType.APPLICATION_JSON)
 public class FilescannerResource {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(FilescannerResource.class);
+
+	private static final String API_VERSION_MF = "API-Version wird nicht unterstützt. Bitte Header API-Version prüfen."
+        + " Unterstützte Versionen: {0}";
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(FilescannerResource.class);
+
+
 
     @ConfigProperty(name = "quarkus.http.port")
     String port;
@@ -80,7 +89,7 @@ public class FilescannerResource {
     @POST
     @Path("detection/v1")
     @Consumes(MediaType.APPLICATION_JSON)
-    @Operation(operationId = "scannt ein File auf Threads", summary = "Es wird auf Viren und Zip-Bomben geprüft")
+    @Operation(operationId = "scanFile", summary = "scannt ein File auf Threads. Es wird auf Viren und Zip-Bomben geprüft")
     @APIResponse(
             name = "ScanFileOKResponse",
             description = "Scan fertig",
@@ -107,6 +116,41 @@ public class FilescannerResource {
         ScanResult result = scanService.scanFile(payload);
 
         return Response.ok(result).build();
+    }
+
+    @Blocking
+    @POST
+    @Path("file")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Operation(operationId = "scanFileVersion2", summary = "scannt ein File auf Threads. Es wird auf Viren und Zip-Bomben geprüft")
+    @APIResponse(
+            name = "OKResponse",
+            description = "Scan fertig",
+            responseCode = "200",
+            content = @Content(mediaType = "application/json", schema = @Schema(implementation = ScanResult.class)))
+    @APIResponse(
+            name = "NotAuthorized",
+            description = "wenn mit einer unbekannten Client-ID aufgerufen wurde",
+            responseCode = "401")
+    @APIResponse(
+            name = "ServerError",
+            description = "Serverfehler",
+            responseCode = "500",
+            content = @Content(schema = @Schema(implementation = MessagePayload.class)))
+    public ScanResult scanFileVersion2(@HeaderParam("API-Version") final int apiVersion, @Valid final ScanRequestPayload payload ) {
+
+    	if (apiVersion != 2) {
+            throw new UnsupportedVersionException(MessageFormat.format(API_VERSION_MF, "2"));
+        }
+
+        if (!authService.isKnown(payload.getClientId())) {
+
+            LOGGER.warn("Unerlaubter Zugriff: clientId = {}", payload.getClientId());
+
+            throw new ClientAuthException();
+        }
+
+        return scanService.scanFile(payload);
     }
 
     @GET
