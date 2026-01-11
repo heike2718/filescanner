@@ -9,21 +9,21 @@ package de.egladil.web.filescanner_api.domain.error;
  */
 public class IORuntimeException extends RuntimeException {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1L;
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-	public IORuntimeException(final String message) {
+    public IORuntimeException(final String message) {
 
-		super(message);
+        super(message);
 
-	}
+    }
 
-	public IORuntimeException(final String message, final Throwable cause) {
+    public IORuntimeException(final String message, final Throwable cause) {
 
-		super(message, cause);
+        super(message, cause);
 
-	}
+    }
 
 }

@@ -12,27 +12,27 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class FilescannerSecurityIncidentRegistered extends AbstractFilescannerDomainEvent {
 
-	@JsonProperty
-	private String message;
+    @JsonProperty
+    private String message;
 
-	public FilescannerSecurityIncidentRegistered withMessage(final String message) {
+    public FilescannerSecurityIncidentRegistered withMessage(final String message) {
 
-		this.message = message;
-		return this;
-	}
+        this.message = message;
+        return this;
+    }
 
-	@Override
-	@JsonIgnore
-	public String typeName() {
+    @Override
+    @JsonIgnore
+    public String typeName() {
 
-		return FilescannerEventType.SECURITY_INCIDENT_REGISTERED.getLabel();
-	}
+        return FilescannerEventType.SECURITY_INCIDENT_REGISTERED.getLabel();
+    }
 
-	@Override
-	@JsonIgnore
-	public String getMessagingPreview() {
+    @Override
+    @JsonIgnore
+    public String getMessagingPreview() {
 
-		return message;
-	}
+        return message;
+    }
 
 }

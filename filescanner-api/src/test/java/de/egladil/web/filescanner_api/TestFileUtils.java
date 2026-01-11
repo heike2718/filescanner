@@ -12,18 +12,18 @@ import java.io.InputStream;
  */
 public class TestFileUtils {
 
-	public static byte[] loadDataQuietly(final String classpathLocation) {
+    public static byte[] loadDataQuietly(final String classpathLocation) {
 
-		System.out.println(classpathLocation);
+        System.out.println(classpathLocation);
 
-		try (InputStream in = TestFileUtils.class.getResourceAsStream(classpathLocation)) {
+        try (InputStream in = TestFileUtils.class.getResourceAsStream(classpathLocation)) {
 
-			return in.readAllBytes();
-		} catch (IOException e) {
+            return in.readAllBytes();
+        } catch (IOException e) {
 
-			throw new RuntimeException("Test nicht möglich: " + e.getMessage(), e);
-		}
+            throw new RuntimeException("Test nicht möglich: " + e.getMessage(), e);
+        }
 
-	}
+    }
 
 }

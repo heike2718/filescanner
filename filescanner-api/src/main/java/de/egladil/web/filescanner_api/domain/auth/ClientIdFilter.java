@@ -14,17 +14,17 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class ClientIdFilter {
 
-	private final List<String> clientIds;
+    private final List<String> clientIds;
 
-	ClientIdFilter(final String clientIds) {
+    ClientIdFilter(final String clientIds) {
 
-		String[] tokens = StringUtils.split(clientIds, ",");
-		this.clientIds = Arrays.asList(tokens);
-	}
+        String[] tokens = StringUtils.split(clientIds, ",");
+        this.clientIds = Arrays.asList(tokens);
+    }
 
-	boolean isKnownClientId(final String clientId) {
+    boolean isKnownClientId(final String clientId) {
 
-		return this.clientIds.stream().filter(id -> id.equals(clientId)).findFirst().isPresent();
-	}
+        return this.clientIds.stream().filter(id -> id.equals(clientId)).findFirst().isPresent();
+    }
 
 }

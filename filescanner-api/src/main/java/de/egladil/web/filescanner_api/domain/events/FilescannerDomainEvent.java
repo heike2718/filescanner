@@ -14,26 +14,27 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public interface FilescannerDomainEvent {
 
-	/**
-	 * @return LocalDateTime
-	 */
-	@JsonIgnore
-	LocalDateTime occuredOn();
+    /**
+     * @return LocalDateTime
+     */
+    @JsonIgnore
+    LocalDateTime occuredOn();
 
-	/**
-	 * @return String
-	 */
-	@JsonProperty
-	String typeName();
+    /**
+     * @return String
+     */
+    @JsonProperty
+    String typeName();
 
-	/**
-	 * Gibt einen Text aus, der in einem Messager oder als Mailtext versendet werden kann.
-	 *
-	 * @return
-	 */
-	@JsonIgnore
-	String getMessagingPreview();
+    /**
+     * Gibt einen Text aus, der in einem Messager oder als Mailtext versendet werden
+     * kann.
+     *
+     * @return
+     */
+    @JsonIgnore
+    String getMessagingPreview();
 
-	@JsonIgnore
-	String serializeQuietly();
+    @JsonIgnore
+    String serializeQuietly();
 }

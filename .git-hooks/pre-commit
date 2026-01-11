@@ -1,0 +1,28 @@
+#!/usr/bin/env sh
+set -e
+
+BACKEND_DIR="filescanner-api"
+
+# 1) Gestagte Dateien
+STAGED="$(git diff --cached --name-only --diff-filter=ACM || true)"
+[ -z "$STAGED" ] && exit 0
+
+# Hilfsfunktion: prüft, ob gestagte Dateien ein Pattern matchen
+has_staged() {
+  echo "$STAGED" | grep -E "$1" >/dev/null 2>&1
+}
+
+# CSV-Liste für Nx (kommagetrennt)
+STAGED_CSV="$(printf '%s\n' "$STAGED" | paste -sd, -)"
+
+# 2) Backend – Format + schneller Lint
+if echo "$STAGED" | grep -qE '\.java$'; then
+  echo "☕ format and sort (backend)"
+  (cd "$BACKEND_DIR" && mvn -Pformat-apply formatter:format@format-apply impsort:sort@impsort-sort)
+  git ls-files -m | grep -E '\.java$' | xargs -r git add
+
+#  echo "🔍 Checkstyle (schnell)"
+#  (cd backend/kaeuzchenlager && mvn -q checkstyle:check)
+fi
+
+exit 0
